@@ -87,6 +87,8 @@ components:
         title:
           type: string
           description: "作成されるタスクのタイトル"
+          maxLength: 256
+          minLength: 1
       required:
         - title
 
@@ -135,6 +137,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/InvalidParam"
+      required:
+        - title
+        - detail
+        - invalid-params
+
     InvalidParam:
       description: "エラーレスポンスの内容"
       type: object
@@ -145,5 +152,8 @@ components:
         reason:
           type: string
           description: "エラーの理由"
+      required:
+        - name
+        - reason
 
 
