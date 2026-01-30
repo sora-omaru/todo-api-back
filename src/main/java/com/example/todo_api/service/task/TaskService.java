@@ -2,12 +2,10 @@ package com.example.todo_api.service.task;
 
 import com.example.todo_api.repository.task.TaskRecord;
 import com.example.todo_api.repository.task.TaskRepository;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +17,12 @@ public class TaskService {
                 .map(record -> new TaskEntity(record.getId(), record.getTitle()))
                 .orElseThrow(() -> new TaskEntityNotFoundException(taskId));
 
+
+    }
+
+    public List<TaskEntity> find(int limit, long offset) {
+        return taskRepository.selectList(limit,offset).stream().map(record ->
+                new TaskEntity(record.getId(), record.getTitle())).toList();
 
     }
 
